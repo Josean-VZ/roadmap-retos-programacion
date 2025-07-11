@@ -1,0 +1,32 @@
+name: Stats
+
+on:
+  push:
+    branches: [ main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout reposito
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          
+      - name: Rub script
+        run: python stats.py
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5 
+        with: 
+          commit_message: Update stats
+          commit_user_name: Josean Valadez [Github Actions]
+          commit_user_email: joseanvaladez15@gmail.com
+          commit_author: Josean-VZ
